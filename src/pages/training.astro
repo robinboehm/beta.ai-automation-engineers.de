@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const plans = [
+  {
+    name: 'Free',
+    price: '0',
+    period: 'forever',
+    description: 'Perfect for getting started with AI engineering.',
+    features: [
+      'Daily AI news digest',
+      '10 free videos per month',
+      'Community forum access',
+      'Weekly newsletter',
+    ],
+    cta: 'Get Started',
+    ctaHref: '#',
+    highlighted: false,
+  },
+  {
+    name: 'Pro',
+    price: '29',
+    period: 'month',
+    description: 'For engineers serious about mastering AI.',
+    features: [
+      'Everything in Free',
+      'Unlimited video access',
+      'Structured learning paths',
+      'Monthly live Q&A sessions',
+      'Downloadable resources',
+      'Priority support',
+    ],
+    cta: 'Start 14-day Trial',
+    ctaHref: '#',
+    highlighted: true,
+  },
+  {
+    name: 'Team',
+    price: '99',
+    period: 'month',
+    description: 'Upskill your entire engineering team.',
+    features: [
+      'Everything in Pro',
+      'Up to 10 seats',
+      'Team progress dashboard',
+      'Custom learning paths',
+      'Dedicated account manager',
+      'Invoice billing',
+    ],
+    cta: 'Contact Sales',
+    ctaHref: '#',
+    highlighted: false,
+  },
+];
+
+const learningPaths = [
+  {
+    title: 'AI Foundations',
+    level: 'Beginner',
+    duration: '4 weeks',
+    modules: 12,
+    description: 'Build a solid understanding of how modern AI systems work — from neural networks to transformer architectures.',
+    color: 'from-green-400 to-green-600',
+  },
+  {
+    title: 'Prompt Engineering & RAG',
+    level: 'Intermediate',
+    duration: '6 weeks',
+    modules: 18,
+    description: 'Master prompt design patterns and build retrieval-augmented generation systems that actually work in production.',
+    color: 'from-blue-400 to-brand-600',
+  },
+  {
+    title: 'AI Agent Systems',
+    level: 'Advanced',
+    duration: '8 weeks',
+    modules: 24,
+    description: 'Design and implement autonomous AI agents with tool use, memory systems, and multi-agent orchestration.',
+    color: 'from-purple-400 to-purple-700',
+  },
+];
+---
+
+<BaseLayout title="Training" description="Structured AI learning paths for engineers at every level.">
+  <!-- Page Header -->
+  <section class="bg-gradient-to-br from-gray-900 to-brand-900 text-white py-20">
+    <div class="container-wide text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold mb-4">AI Engineering Training</h1>
+      <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+        Structured learning paths to take you from AI basics to building production-grade systems — at your own pace.
+      </p>
+    </div>
+  </section>
+
+  <!-- Learning Paths -->
+  <section class="py-20 bg-white">
+    <div class="container-wide">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Learning Paths</h2>
+        <p class="text-gray-500">Structured curricula designed by AI engineers, for AI engineers.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {learningPaths.map((path) => (
+          <div class="rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class={`bg-gradient-to-br ${path.color} p-8 text-white`}>
+              <div class="text-xs font-semibold uppercase tracking-wider opacity-80 mb-2">{path.level}</div>
+              <h3 class="text-xl font-bold mb-1">{path.title}</h3>
+              <div class="text-sm opacity-80">{path.duration} · {path.modules} modules</div>
+            </div>
+            <div class="p-6 bg-white">
+              <p class="text-sm text-gray-600 mb-4">{path.description}</p>
+              <a href="#" class="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+                View curriculum
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-wide">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 mb-3">Simple, Transparent Pricing</h2>
+        <p class="text-gray-500">Start free. Upgrade when you need more.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {plans.map((plan) => (
+          <div class={`rounded-2xl p-8 ${plan.highlighted ? 'bg-brand-600 text-white shadow-xl ring-4 ring-brand-200 scale-105' : 'bg-white border border-gray-100 shadow-sm'}`}>
+            <div class="mb-6">
+              <h3 class={`text-lg font-bold mb-1 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>{plan.name}</h3>
+              <div class="flex items-baseline gap-1">
+                <span class={`text-4xl font-extrabold ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>€{plan.price}</span>
+                <span class={`text-sm ${plan.highlighted ? 'text-blue-100' : 'text-gray-500'}`}>/{plan.period}</span>
+              </div>
+              <p class={`text-sm mt-2 ${plan.highlighted ? 'text-blue-100' : 'text-gray-500'}`}>{plan.description}</p>
+            </div>
+
+            <ul class="space-y-3 mb-8">
+              {plan.features.map((feature) => (
+                <li class="flex items-center gap-2 text-sm">
+                  <svg class={`w-4 h-4 flex-shrink-0 ${plan.highlighted ? 'text-blue-200' : 'text-brand-500'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span class={plan.highlighted ? 'text-blue-50' : 'text-gray-600'}>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href={plan.ctaHref}
+              class={`block text-center py-3 px-6 rounded-xl font-semibold transition-colors ${
+                plan.highlighted
+                  ? 'bg-white text-brand-700 hover:bg-blue-50'
+                  : 'bg-brand-600 text-white hover:bg-brand-700'
+              }`}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

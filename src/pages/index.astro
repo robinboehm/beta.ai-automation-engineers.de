@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { newsItems } from '../data/news';
+import { videos } from '../data/videos';
+
+const featuredNews = newsItems.slice(0, 3);
+const featuredVideos = videos.slice(0, 3);
+
+const stats = [
+  { label: 'Community Members', value: '12,400+' },
+  { label: 'AI Tools Covered', value: '340+' },
+  { label: 'Learning Videos', value: '180+' },
+  { label: 'Weekly Reports', value: '52+' },
+];
+
+const pillars = [
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>`,
+    title: 'Curated AI News',
+    description: 'Handpicked daily updates on AI releases, research breakthroughs, and industry moves — no hype, just signal.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>`,
+    title: 'Video Tutorials',
+    description: 'In-depth video guides on building with AI tools, from beginner walkthroughs to advanced architecture deep-dives.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`,
+    title: 'Structured Training',
+    description: 'Guided learning paths to master AI engineering — from prompt design to building production-ready AI systems.',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
+    title: 'Active Community',
+    description: 'Connect with other AI engineers, share projects, get feedback, and collaborate on the frontier of AI automation.',
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-brand-900 via-brand-700 to-brand-600 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-300 rounded-full filter blur-3xl"></div>
+    </div>
+    <div class="container-wide relative py-24 md:py-32">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-1.5 text-sm font-medium mb-6 backdrop-blur-sm">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+          Updated daily with the latest in AI
+        </div>
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
+          Master AI Engineering.<br />
+          <span class="text-blue-300">Stay Ahead of the Curve.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-2xl">
+          Join thousands of engineers learning to build, automate, and innovate with AI. Daily news, video tutorials, and structured training — all in one place.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/training" class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-700 font-bold rounded-xl hover:bg-blue-50 transition-colors text-base">
+            Start Learning Free
+            <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+          <a href="/videos" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors text-base backdrop-blur-sm">
+            Browse Videos
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="bg-white border-b border-gray-100">
+    <div class="container-wide py-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-3xl md:text-4xl font-extrabold text-brand-600 mb-1">{stat.value}</div>
+            <div class="text-sm text-gray-500 font-medium">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Pillars -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-wide">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Everything you need to stay ahead</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          From breaking AI news to hands-on tutorials, we cover every dimension of AI engineering so you can focus on building.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {pillars.map((pillar) => (
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center mb-4" set:html={pillar.icon} />
+            <h3 class="text-lg font-bold text-gray-900 mb-2">{pillar.title}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed">{pillar.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured News -->
+  <section class="py-20 bg-white">
+    <div class="container-wide">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900">Latest AI News</h2>
+          <p class="text-gray-500 mt-1">The most important developments in AI, curated daily</p>
+        </div>
+        <a href="/news" class="hidden md:inline-flex items-center text-brand-600 font-semibold hover:text-brand-700 gap-1">
+          All news
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredNews.map((item) => (
+          <article class="group border border-gray-100 rounded-2xl p-6 hover:border-brand-200 hover:shadow-md transition-all duration-200">
+            <div class="flex items-center gap-2 mb-3">
+              <span class={`text-xs font-semibold px-2.5 py-1 rounded-full capitalize ${
+                item.category === 'releases' ? 'bg-purple-100 text-purple-700' :
+                item.category === 'research' ? 'bg-green-100 text-green-700' :
+                item.category === 'business' ? 'bg-amber-100 text-amber-700' :
+                'bg-blue-100 text-blue-700'
+              }`}>{item.category}</span>
+              <span class="text-xs text-gray-400">{new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            </div>
+            <h3 class="font-bold text-gray-900 mb-2 group-hover:text-brand-600 transition-colors leading-snug">
+              <a href={item.url}>{item.title}</a>
+            </h3>
+            <p class="text-sm text-gray-600 mb-4 line-clamp-2">{item.excerpt}</p>
+            <div class="text-xs text-gray-400">via <a href={item.sourceUrl} class="text-brand-500 hover:underline">{item.source}</a></div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-6 text-center md:hidden">
+        <a href="/news" class="btn-secondary text-sm">View all news</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Videos -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-wide">
+      <div class="flex items-center justify-between mb-10">
+        <div>
+          <h2 class="text-3xl font-bold text-gray-900">Featured Videos</h2>
+          <p class="text-gray-500 mt-1">Deep-dives and tutorials from AI engineering experts</p>
+        </div>
+        <a href="/videos" class="hidden md:inline-flex items-center text-brand-600 font-semibold hover:text-brand-700 gap-1">
+          All videos
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {featuredVideos.map((video) => (
+          <article class="group bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+            <div class="relative aspect-video overflow-hidden">
+              <img
+                src={video.thumbnail}
+                alt={video.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-lg">
+                  <svg class="w-5 h-5 text-brand-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <span class="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-0.5 rounded font-mono">{video.duration}</span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-bold text-gray-900 mb-1 group-hover:text-brand-600 transition-colors line-clamp-2">
+                <a href={video.videoUrl}>{video.title}</a>
+              </h3>
+              <p class="text-xs text-gray-500">{video.instructor} · {new Date(video.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-6 text-center md:hidden">
+        <a href="/videos" class="btn-secondary text-sm">View all videos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-brand-600">
+    <div class="container-wide text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to level up your AI skills?</h2>
+      <p class="text-blue-100 text-lg mb-8 max-w-xl mx-auto">
+        Join our community of AI engineers and get access to curated news, premium video content, and structured learning paths.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/training" class="inline-flex items-center justify-center px-8 py-4 bg-white text-brand-700 font-bold rounded-xl hover:bg-blue-50 transition-colors">
+          Get Started Free
+        </a>
+        <a href="/news" class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors">
+          Browse Content
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
