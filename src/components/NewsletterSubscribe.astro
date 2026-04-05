@@ -1,0 +1,640 @@
+---
+interface Props {
+  variant?: 'inline' | 'banner' | 'sidebar';
+}
+const { variant = 'banner' } = Astro.props;
+---
+
+{variant === 'banner' && (
+  <section class="newsletter-banner relative overflow-hidden">
+    <!-- Grid texture overlay -->
+    <div class="grid-texture" aria-hidden="true"></div>
+    <!-- Glow orb -->
+    <div class="glow-orb" aria-hidden="true"></div>
+
+    <div class="container-wide relative z-10 py-16 md:py-20">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="issue-badge">
+          <span class="dot"></span>
+          <span class="badge-text">WEEKLY DIGEST</span>
+        </div>
+
+        <h2 class="headline">
+          The AI signal,<br />
+          <span class="headline-accent">zero noise.</span>
+        </h2>
+
+        <p class="subline">
+          Every week: the 5 AI developments that actually matter — curated for engineers who build, not just read.
+          No hype. No filler. Just what moves the needle.
+        </p>
+
+        <form class="subscribe-form" id="newsletter-form-banner" novalidate>
+          <div class="form-row">
+            <div class="input-wrapper">
+              <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <input
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                class="email-input"
+                autocomplete="email"
+                required
+                aria-label="Email address"
+              />
+            </div>
+            <button type="submit" class="submit-btn">
+              <span class="btn-label">Subscribe</span>
+              <span class="btn-arrow">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="18" height="18">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </span>
+            </button>
+          </div>
+          <p class="form-note">Free forever · No spam · Unsubscribe anytime</p>
+          <div class="success-msg hidden" id="success-banner">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="20" height="20">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            You're in! First digest lands in your inbox this week.
+          </div>
+        </form>
+
+        <div class="social-proof">
+          <div class="avatars">
+            {Array.from({length: 5}).map((_, i) => (
+              <div class={`avatar avatar-${i}`}>{String.fromCharCode(65 + i)}</div>
+            ))}
+          </div>
+          <span class="proof-text"><strong>2,400+</strong> engineers already subscribed</span>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+{variant === 'inline' && (
+  <div class="inline-subscribe">
+    <div class="inline-inner">
+      <div class="inline-left">
+        <div class="inline-icon-wrap">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="22" height="22">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+          </svg>
+        </div>
+        <div>
+          <p class="inline-title">Get the weekly digest</p>
+          <p class="inline-desc">Top AI news in your inbox, every week</p>
+        </div>
+      </div>
+      <form class="inline-form" id="newsletter-form-inline" novalidate>
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          class="inline-input"
+          autocomplete="email"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit" class="inline-btn">Subscribe</button>
+        <div class="inline-success hidden" id="success-inline">Subscribed!</div>
+      </form>
+    </div>
+  </div>
+)}
+
+{variant === 'sidebar' && (
+  <aside class="sidebar-subscribe">
+    <div class="sidebar-header">
+      <span class="sidebar-tag">WEEKLY DIGEST</span>
+    </div>
+    <h3 class="sidebar-title">Get the AI Signal</h3>
+    <p class="sidebar-desc">Weekly curation of what actually matters in AI — straight to your inbox.</p>
+    <form class="sidebar-form" id="newsletter-form-sidebar" novalidate>
+      <input
+        type="email"
+        name="email"
+        placeholder="your@email.com"
+        class="sidebar-input"
+        autocomplete="email"
+        required
+        aria-label="Email address"
+      />
+      <button type="submit" class="sidebar-btn">
+        Join the digest
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="14" height="14">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </button>
+      <div class="sidebar-success hidden" id="success-sidebar">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        </svg>
+        You're subscribed!
+      </div>
+    </form>
+    <p class="sidebar-note">2,400+ engineers · Free · No spam</p>
+  </aside>
+)}
+
+<style>
+  /* ============================================================
+     BANNER VARIANT
+     ============================================================ */
+  .newsletter-banner {
+    background: #0a0f1e;
+    position: relative;
+  }
+
+  .grid-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .glow-orb {
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .issue-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.3);
+    border-radius: 100px;
+    padding: 6px 14px;
+    margin-bottom: 24px;
+  }
+
+  .dot {
+    width: 6px;
+    height: 6px;
+    background: #60a5fa;
+    border-radius: 50%;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .badge-text {
+    font-family: 'Courier New', 'Courier', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #93c5fd;
+  }
+
+  .headline {
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #f8fafc;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .headline-accent {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subline {
+    font-size: 1.05rem;
+    color: #94a3b8;
+    max-width: 520px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+
+  .subscribe-form {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .form-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .input-wrapper {
+    position: relative;
+    flex: 1;
+  }
+
+  .input-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: #475569;
+    pointer-events: none;
+  }
+
+  .email-input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px 0 44px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .email-input::placeholder {
+    color: #475569;
+  }
+
+  .email-input:focus {
+    border-color: rgba(96, 165, 250, 0.5);
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  .submit-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 52px;
+    padding: 0 22px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+
+  .submit-btn:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+
+  .btn-arrow svg {
+    transition: transform 0.2s;
+  }
+
+  .submit-btn:hover .btn-arrow svg {
+    transform: translateX(3px);
+  }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: #475569;
+    letter-spacing: 0.01em;
+  }
+
+  .success-msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 12px 20px;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
+    color: #6ee7b7;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .success-msg.hidden { display: none; }
+
+  .social-proof {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .avatars {
+    display: flex;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #0a0f1e;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-left: -8px;
+  }
+
+  .avatar:first-child { margin-left: 0; }
+
+  .avatar-0 { background: #2563eb; }
+  .avatar-1 { background: #7c3aed; }
+  .avatar-2 { background: #059669; }
+  .avatar-3 { background: #d97706; }
+  .avatar-4 { background: #dc2626; }
+
+  .proof-text {
+    font-size: 0.82rem;
+    color: #64748b;
+  }
+
+  .proof-text strong {
+    color: #94a3b8;
+  }
+
+  @media (max-width: 480px) {
+    .form-row {
+      flex-direction: column;
+    }
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  /* ============================================================
+     INLINE VARIANT
+     ============================================================ */
+  .inline-subscribe {
+    background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 32px 0;
+  }
+
+  .inline-inner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .inline-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .inline-icon-wrap {
+    width: 44px;
+    height: 44px;
+    background: #2563eb;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .inline-title {
+    font-weight: 700;
+    color: #1e3a8a;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .inline-desc {
+    color: #3b82f6;
+    font-size: 0.8rem;
+    margin: 2px 0 0;
+  }
+
+  .inline-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex: 1;
+    min-width: 260px;
+  }
+
+  .inline-input {
+    flex: 1;
+    height: 42px;
+    padding: 0 14px;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    outline: none;
+    background: white;
+    color: #1e293b;
+    transition: border-color 0.2s;
+  }
+
+  .inline-input:focus {
+    border-color: #2563eb;
+  }
+
+  .inline-input::placeholder {
+    color: #94a3b8;
+  }
+
+  .inline-btn {
+    height: 42px;
+    padding: 0 18px;
+    background: #2563eb;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+
+  .inline-btn:hover {
+    background: #1d4ed8;
+  }
+
+  .inline-success {
+    color: #059669;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .inline-success.hidden { display: none; }
+
+  /* ============================================================
+     SIDEBAR VARIANT
+     ============================================================ */
+  .sidebar-subscribe {
+    background: #0a0f1e;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .sidebar-header {
+    margin-bottom: 12px;
+  }
+
+  .sidebar-tag {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.12);
+    border: 1px solid rgba(37, 99, 235, 0.25);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+
+  .sidebar-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .sidebar-desc {
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.55;
+    margin: 0 0 16px;
+  }
+
+  .sidebar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sidebar-input {
+    height: 42px;
+    padding: 0 14px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    color: #f1f5f9;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .sidebar-input::placeholder {
+    color: #334155;
+  }
+
+  .sidebar-input:focus {
+    border-color: rgba(96, 165, 250, 0.4);
+  }
+
+  .sidebar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 40px;
+    background: #2563eb;
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .sidebar-btn:hover {
+    background: #1d4ed8;
+  }
+
+  .sidebar-success {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #6ee7b7;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .sidebar-success.hidden { display: none; }
+
+  .sidebar-note {
+    margin: 10px 0 0;
+    font-size: 0.72rem;
+    color: #334155;
+  }
+</style>
+
+<script>
+  // Unified form handler for all variants
+  function handleNewsletterForm(formId: string, successId: string) {
+    const form = document.getElementById(formId) as HTMLFormElement | null;
+    const successEl = document.getElementById(successId);
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const emailInput = form.querySelector('input[type="email"]') as HTMLInputElement;
+      if (!emailInput?.value || !emailInput.checkValidity()) {
+        emailInput?.focus();
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (btn) {
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+      }
+
+      // Simulate async subscription (replace with real endpoint)
+      await new Promise(r => setTimeout(r, 600));
+
+      // Hide form fields, show success
+      const row = form.querySelector('.form-row, .inline-form > input, .inline-form > button');
+      form.querySelectorAll('input, button[type="submit"]').forEach(el => {
+        (el as HTMLElement).style.display = 'none';
+      });
+      form.querySelector('.form-note')?.setAttribute('style', 'display:none');
+
+      if (successEl) {
+        successEl.classList.remove('hidden');
+        successEl.style.display = '';
+      }
+    });
+  }
+
+  handleNewsletterForm('newsletter-form-banner', 'success-banner');
+  handleNewsletterForm('newsletter-form-inline', 'success-inline');
+  handleNewsletterForm('newsletter-form-sidebar', 'success-sidebar');
+</script>
