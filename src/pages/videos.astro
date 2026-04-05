@@ -37,22 +37,22 @@ import { videos } from '../data/videos';
             <!-- Thumbnail -->
             <div class="relative aspect-video overflow-hidden bg-gray-100">
               <img
-                src={video.thumbnail}
+                src={`https://img.youtube.com/vi/${video.youtubeId}/hqdefault.jpg`}
                 alt={video.title}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
               <!-- Overlay with play button -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-all flex items-center justify-center">
+              <a href={`https://www.youtube.com/watch?v=${video.youtubeId}`} target="_blank" rel="noopener noreferrer" class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 transition-all flex items-center justify-center">
                 <div class="w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
                   <svg class="w-6 h-6 text-brand-600 ml-1" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </div>
-              </div>
-              <!-- Duration badge -->
+              </a>
+              <!-- Level badge -->
               <span class="absolute bottom-2 right-2 bg-black/75 text-white text-xs px-2 py-0.5 rounded font-mono backdrop-blur-sm">
-                {video.duration}
+                {video.level}
               </span>
             </div>
 
@@ -60,27 +60,23 @@ import { videos } from '../data/videos';
             <div class="p-5">
               <!-- Tags -->
               <div class="flex flex-wrap gap-1.5 mb-3">
-                {video.tags.map((tag) => (
-                  <span class="text-xs bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full font-medium">{tag}</span>
+                <span class="text-xs bg-brand-50 text-brand-600 px-2 py-0.5 rounded-full font-medium">{video.category}</span>
+                {video.tags.slice(0, 2).map((tag) => (
+                  <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-medium">{tag}</span>
                 ))}
               </div>
 
               <h2 class="font-bold text-gray-900 text-base mb-2 leading-snug group-hover:text-brand-600 transition-colors">
-                <a href={video.videoUrl}>{video.title}</a>
+                <a href={`https://www.youtube.com/watch?v=${video.youtubeId}`} target="_blank" rel="noopener noreferrer">{video.title}</a>
               </h2>
 
               <p class="text-sm text-gray-500 mb-4 line-clamp-2 leading-relaxed">{video.description}</p>
 
               <!-- Footer -->
               <div class="flex items-center justify-between pt-3 border-t border-gray-100">
-                <div class="flex items-center gap-2">
-                  <div class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">
-                    {video.instructor.split(' ').map(n => n[0]).join('').slice(0, 2)}
-                  </div>
-                  <span class="text-xs text-gray-600 font-medium">{video.instructor}</span>
-                </div>
-                <time class="text-xs text-gray-400" datetime={video.date}>
-                  {new Date(video.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                <span class="text-xs text-gray-600 font-medium">{video.category}</span>
+                <time class="text-xs text-gray-400" datetime={video.publishedAt}>
+                  {new Date(video.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                 </time>
               </div>
             </div>
