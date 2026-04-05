@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { newsItems, categories } from '../data/news';
+import { getSourceNewsItems, sourceCategories as categories } from '../data/news-from-source';
 import NewsletterSubscribe from '../components/NewsletterSubscribe.astro';
 
-// For static rendering we show all items; filtering happens client-side
+// Load articles from the workshops-de submodule, newest first
+const newsItems = getSourceNewsItems();
 ---
 
 <BaseLayout title="AI News" description="Stay up to date with the latest AI news, releases, research, and industry updates.">

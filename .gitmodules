@@ -1,0 +1,3 @@
+[submodule "news-source"]
+	path = news-source
+	url = https://github.com/workshops-de/ai-automation-engineers.de.git
